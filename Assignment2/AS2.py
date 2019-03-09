@@ -60,7 +60,7 @@ def answer_two():
 # This function should return a single string value
 def answer_three():
     rt_country = ''
-    max_pro = 0;
+    max_pro = 0
     for index, row in df.iterrows():
         if row['Gold'] == 0 or row['Gold.1'] == 0:
             continue
