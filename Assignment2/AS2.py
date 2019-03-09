@@ -50,3 +50,23 @@ def answer_two():
     return rt_country
 
 # print(answer_two())
+
+# Which country had the biggest difference between their summer gold medal 
+# counts and winter gold metal counts relative to their total gold medal counts
+# relative to their total gold medal count?
+# (summer gold - winter gold) / total gold
+# Only include countries that have won at least 1 gold in both summer 
+# and winter
+# This function should return a single string value
+def answer_three():
+    rt_country = ''
+    max_pro = 0;
+    for index, row in df.iterrows():
+        if row['Gold'] == 0 or row['Gold.1'] == 0:
+            continue
+        if (row['Gold'] - row['Gold.1']) / row['Gold.2'] > max_pro:
+            max_pro = (row['Gold'] - row['Gold.1']) / row['Gold.2']
+            rt_country = index
+    return rt_country
+
+# print (answer_three())
