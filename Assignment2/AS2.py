@@ -31,7 +31,7 @@ def answer_one():
     max_number = 0
     for index, row in df.iterrows():
         if row['Gold'] > max:
-            max = row['Gold']
+            max_number = row['Gold']
             max_country = index
     return max_country
 
