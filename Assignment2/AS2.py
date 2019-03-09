@@ -24,22 +24,26 @@ df['ID'] = names_ids.str[1].str[:3]
 df = df.drop('Totals')
 # print(df.head())
 
-# Which country has won the most gold medals in summer games?
-# This function should return a single string value.
+'''
+    Which country has won the most gold medals in summer games?
+    This function should return a single string value.
+'''
 def answer_one():
     max_country = ''
     max_number = 0
     for index, row in df.iterrows():
-        if row['Gold'] > max:
+        if row['Gold'] > max_number:
             max_number = row['Gold']
             max_country = index
     return max_country
 
 # print(answer_one())
 
-# Which country had the biggest difference between their summer and winter 
-# gold medal counts?
-# This function should return a single string value
+'''
+    Which country had the biggest difference between their summer and winter 
+    gold medal counts?
+    This function should return a single string value
+'''
 def answer_two():
     rt_country = ''
     max_diff = 0
@@ -51,13 +55,15 @@ def answer_two():
 
 # print(answer_two())
 
-# Which country had the biggest difference between their summer gold medal 
-# counts and winter gold metal counts relative to their total gold medal counts
-# relative to their total gold medal count?
-# (summer gold - winter gold) / total gold
-# Only include countries that have won at least 1 gold in both summer 
-# and winter
-# This function should return a single string value
+'''
+    Which country had the biggest difference between their summer gold medal 
+    counts and winter gold metal counts relative to their total gold medal counts
+    relative to their total gold medal count?
+    (summer gold - winter gold) / total gold
+    Only include countries that have won at least 1 gold in both summer 
+    and winter
+    This function should return a single string value
+'''
 def answer_three():
     rt_country = ''
     max_pro = 0
@@ -70,3 +76,17 @@ def answer_three():
     return rt_country
 
 # print (answer_three())
+
+'''
+    Write a function that creates a Series called "Points" which is a weighted 
+    value where each gold medal (Gold.2) counts for 3 points, silver medals 
+    (Silver.2) for 2 points, and bronze medal (Bronze.2) for 1 point. 
+    The function should return only the column (a Series object) which you 
+    created, with the country names as indices
+'''
+def answer_four():
+    Points = df['Gold.2']*3 + df['Silver.2']*2 + df['Bronze.2']*1
+    Points = pd.Series(Points, index = df.index)
+    return Points
+
+# print (answer_four())
