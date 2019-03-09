@@ -28,7 +28,7 @@ df = df.drop('Totals')
 # This function should return a single string value.
 def answer_one():
     max_country = ''
-    max = 0
+    max_number = 0
     for index, row in df.iterrows():
         if row['Gold'] > max:
             max = row['Gold']
