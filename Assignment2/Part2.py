@@ -75,3 +75,22 @@ def answer_seven():
     return ans
 
 # print(answer_seven())
+
+
+'''
+    In this datafile, the United States is broken up into four regions using the "REGION" column.
+
+    Create a query that finds the countries that belong to regions 1 or 2, whose name starts with 'Washington', and whose POPESTIMATE 2015 was greater thn their POPESTIMATE 2014.
+    
+    This function should return a 5x2 DataFrame with the columns = ['STNAME', 'CTYNAME'] and the same index ID as the census_df (sorted ascending by index).
+'''
+
+
+def answer_eight():
+    counties_df = census_df[census_df['SUMLEV'] == 50]
+    ans = counties_df[((counties_df['REGION'] == 1) | (counties_df['REGION'] == 2)) & (counties_df['CTYNAME'].str.slice(stop=10) == 'Washington') & (
+        counties_df['POPESTIMATE2015'] > counties_df['POPESTIMATE2014'])][['STNAME', 'CTYNAME']]
+    return ans
+
+
+print(answer_eight())
