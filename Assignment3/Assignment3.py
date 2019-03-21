@@ -127,3 +127,17 @@ def answer_three():
     Top15['Average'] = Top15[years].mean(axis=1)
     avgGDP = Top15['Average'].sort_values(ascending=False)
     return avgGDP
+
+
+def answer_four():
+    Top15 = answer_one()
+    years = ['2006', '2007', '2008', '2009', '2010',
+             '2011', '2012', '2013', '2014', '2015']
+    Top15['Average'] = Top15[years].mean(axis=1)
+    avgGDP = Top15['Average'].sort_values(ascending=False)
+    idx = avgGDP.index[5]
+    tgt_country = Top15.loc[idx]
+    return tgt_country['2015'] - tgt_country['2006']
+
+
+print(answer_four())
