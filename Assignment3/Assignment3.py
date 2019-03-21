@@ -55,7 +55,7 @@ def answer_one():
     columns_to_keep = ['Rank', 'Documents', 'Citable documents', 'Citations', 'Self-citations', 'Citations per document', 'H index',
                        'Energy Supply', 'Energy Supply per Capita', '% Renewable', '2006', '2007', '2008', '2009', '2010', '2011', '2012', '2013', '2014', '2015']
     df = df[columns_to_keep]
-    print(df)
+    return df
 
 # answer_one()
 
@@ -120,4 +120,10 @@ def answer_two():
     return len(df2) - len(df1)
 
 
-print(answer_two())
+def answer_three():
+    Top15 = answer_one()
+    years = ['2006', '2007', '2008', '2009', '2010',
+             '2011', '2012', '2013', '2014', '2015']
+    Top15['Average'] = Top15[years].mean(axis=1)
+    avgGDP = Top15['Average'].sort_values(ascending=False)
+    return avgGDP
