@@ -140,4 +140,10 @@ def answer_four():
     return tgt_country['2015'] - tgt_country['2006']
 
 
-print(answer_four())
+def answer_five():
+    Top15 = answer_one()
+    result = Top15['Energy Supply per Capita'].mean(axis=0)
+    return result
+
+
+print(answer_five())
