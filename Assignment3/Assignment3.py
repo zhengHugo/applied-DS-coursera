@@ -146,4 +146,11 @@ def answer_five():
     return result
 
 
-print(answer_five())
+def answer_six():
+    Top15 = answer_one()
+    target = Top15['% Renewable']
+    max_idx = target.idxmax()
+    return (max_idx, target.loc[max_idx])
+
+
+print(answer_six())
