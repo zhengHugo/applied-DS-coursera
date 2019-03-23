@@ -153,4 +153,12 @@ def answer_six():
     return (max_idx, target.loc[max_idx])
 
 
-print(answer_six())
+def answer_seven():
+    Top15 = answer_one()
+    Top15['Ratio'] = Top15['Self-citations'] / Top15['Citations']
+    target = Top15['Ratio']
+    max_idx = target.idxmax()
+    return (max_idx, target.loc[max_idx])
+
+
+print(answer_seven())
