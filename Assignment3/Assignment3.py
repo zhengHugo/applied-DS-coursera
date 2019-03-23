@@ -161,4 +161,9 @@ def answer_seven():
     return (max_idx, target.loc[max_idx])
 
 
-print(answer_seven())
+def answer_eight():
+    Top15 = answer_one()
+    Top15['Population'] = Top15['Energy Supply'] / \
+        Top15['Energy Supply per Capita']
+    Top15 = Top15.sort_values(by='Population', ascending=False)
+    return Top15.iloc[2].name
