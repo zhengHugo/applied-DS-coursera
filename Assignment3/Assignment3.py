@@ -178,3 +178,39 @@ def answer_nine():
     ans = Top15['Citable Docs per Capita'].corr(
         Top15['Energy Supply per Capita'])
     return ans
+
+
+def answer_ten():
+    Top15 = answer_one()
+    med = Top15['% Renewable'].median()
+    Top15.sort_values(by='Rank')
+    Top15['HighRenew'] = [1 if x >= med else 0 for x in Top15['% Renewable']]
+    return Top15['HighRenew']
+
+
+def answer_eleven():
+    ContinentDict = {'China': 'Asia',
+                     'United States': 'North America',
+                     'Japan': 'Asia',
+                     'United Kingdom': 'Europe',
+                     'Russian Federation': 'Europe',
+                     'Canada': 'North America',
+                     'Germany': 'Europe',
+                     'India': 'Asia',
+                     'France': 'Europe',
+                     'South Korea': 'Asia',
+                     'Italy': 'Europe',
+                     'Spain': 'Europe',
+                     'Iran': 'Asia',
+                     'Australia': 'Australia',
+                     'Brazil': 'South America'}
+    Top15 = answer_one()
+    Top15['PopEst'] = (Top15['Energy Supply'] /
+                       Top15['Energy Supply per Capita'])
+    Top15 = Top15.reset_index()
+    Top15['Continent'] = [ContinentDict[country]
+                          for country in Top15['Country Name']]
+    target = Top15.set_index('Continent')
+    target = target.groupby(target.index)[
+        'PopEst'].agg([np.size, np.sum, np.mean, np.std])
+    return target
