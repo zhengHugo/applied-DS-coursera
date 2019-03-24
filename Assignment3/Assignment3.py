@@ -214,3 +214,33 @@ def answer_eleven():
     target = target.groupby(target.index)[
         'PopEst'].agg([np.size, np.sum, np.mean, np.std])
     return target
+
+
+def answer_twelve():
+    ContinentDict = {'China': 'Asia',
+                     'United States': 'North America',
+                     'Japan': 'Asia',
+                     'United Kingdom': 'Europe',
+                     'Russian Federation': 'Europe',
+                     'Canada': 'North America',
+                     'Germany': 'Europe',
+                     'India': 'Asia',
+                     'France': 'Europe',
+                     'South Korea': 'Asia',
+                     'Italy': 'Europe',
+                     'Spain': 'Europe',
+                     'Iran': 'Asia',
+                     'Australia': 'Australia',
+                     'Brazil': 'South America'}
+    Top15 = answer_one()
+    Top15['PopEst'] = (Top15['Energy Supply'] /
+                       Top15['Energy Supply per Capita'])
+    Top15 = Top15.reset_index()
+    Top15['Continent'] = [ContinentDict[country]
+                          for country in Top15['Country Name']]
+    Top15['bins'] = pd.cut(Top15['% Renewable'], 5)
+    target = Top15.groupby(['Continent', 'bins']).size()
+    return target
+
+
+print(answer_twelve())
