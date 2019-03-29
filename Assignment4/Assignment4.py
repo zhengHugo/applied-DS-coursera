@@ -90,4 +90,42 @@ def get_recession_bottom():
     return recessions_bottom[0]
 
 
-print(get_recession_bottom())
+def convert_housing_data_to_quarters():
+    '''
+        Converts the housing data to quarters and returns it as mean values in a dataframe. 
+        This dataframe should be a dataframe with columns for 2000q1 through 2016q3, and should have a multi-index in the shape of ["State","RegionName"].
+        Note: Quarters are defined in the assignment description, they are not arbitrary three month periods.
+        The resulting dataframe should have 67 columns, and 10,730 rows.
+    '''
+    df = pd.read_csv(
+        'C:/Users/11796/Documents/Study_Materials/Applied_Data_Science/Assignments/Assignment4/City_Zhvi_AllHomes.csv')
+    df = df.drop(df.columns[[0] + list(range(3, 51))], axis=1)
+    for year in range(2000, 2016):
+        spring_column = [str(year) + '-01', str(year) +
+                         '-02', str(year) + '-03']
+        summer_column = [str(year) + '-04', str(year) +
+                         '-05', str(year) + '-06']
+        fall_column = [str(year) + '-07', str(year) + '-08', str(year) + '-09']
+        winter_column = [str(year) + '-10', str(year) +
+                         '-11', str(year) + '-12']
+        df[str(year) + 'q1'] = df[spring_column].mean(axis=1)
+        df[str(year) + 'q2'] = df[summer_column].mean(axis=1)
+        df[str(year) + 'q3'] = df[fall_column].mean(axis=1)
+        df[str(year) + 'q4'] = df[winter_column].mean(axis=1)
+    year = 2016
+    spring_column = [str(year) + '-01', str(year) +
+                     '-02', str(year) + '-03']
+    summer_column = [str(year) + '-04', str(year) +
+                     '-05', str(year) + '-06']
+    fall_column = [str(year) + '-07', str(year) + '-08', str(year) + '-09']
+    df[str(year) + 'q1'] = df[spring_column].mean(axis=1)
+    df[str(year) + 'q2'] = df[summer_column].mean(axis=1)
+    df[str(year) + 'q3'] = df[[str(year) + '-07', str(year) + '-08']].mean(axis=1)
+
+    df = df.drop(df.columns[2:202], axis=1)
+    df['State'] = [states[state] for state in df['State']]
+    df = df.set_index(['State', 'RegionName'])
+    return df
+
+
+print(convert_housing_data_to_quarters())
