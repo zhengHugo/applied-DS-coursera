@@ -32,9 +32,26 @@ def get_list_of_university_towns():
             town = line.split('(')[0].strip()
             state_town.append([state, town])
         elif ',' in line:
-            # print(line)
             # two lines are in a improper format, add manually
             town = line.split(',')[0].strip()
             state_town.append([state, town])
     ans = pd.DataFrame(state_town, columns=['State', 'RegionName'])
     return ans
+
+
+def get_recession_start():
+    '''
+        Returns the year and quarter of the recession start time as a string value in a format such as 2005q3
+    '''
+    df = pd.read_excel(
+        'C:/Users/11796/Documents/Study_Materials/Applied_Data_Science/Assignments/Assignment4/gdplev.xls', skiprows=7)
+    df = df[['Unnamed: 4', 'Unnamed: 5']]
+    df.columns = ['Quarters', 'GDP']
+    recessions_start = []
+    for i in range(len(df) - 2):
+        if df.iloc[i][1] > df.iloc[i+1][1] and df.iloc[i+1][1] > df.iloc[i+2][1]:
+            recessions_start.append(df.iloc[i][0])
+    return recessions_start
+
+
+print(get_recession_start())
