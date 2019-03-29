@@ -47,11 +47,9 @@ def get_recession_start():
         'C:/Users/11796/Documents/Study_Materials/Applied_Data_Science/Assignments/Assignment4/gdplev.xls', skiprows=7)
     df = df[['Unnamed: 4', 'Unnamed: 5']]
     df.columns = ['Quarters', 'GDP']
+    df = df.iloc[212:]
     recessions_start = []
     for i in range(len(df) - 2):
         if df.iloc[i][1] > df.iloc[i+1][1] and df.iloc[i+1][1] > df.iloc[i+2][1]:
             recessions_start.append(df.iloc[i][0])
-    return recessions_start
-
-
-print(get_recession_start())
+    return recessions_start[0]
