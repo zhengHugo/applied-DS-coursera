@@ -174,7 +174,4 @@ def run_ttest():
     return(different, p, better)
 
 
-run_ttest()
-
-
 print(run_ttest())
