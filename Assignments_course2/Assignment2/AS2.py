@@ -4,7 +4,7 @@ import numpy as np
 
 
 df = pd.read_csv(
-    'C:\\Users\\11796\\Documents\\Study_Materials\\Coursera\\Applied_Data_Science\\Assignments\\Assignments_course2\\Assignment2\\data\\C2A2_data\\BinnedCsvs_d400\\fb441e62df2d58994928907a91895ec62c2c42e6cd075c2700843b89.csv')
+    'Assignments_course2/Assignment2/data/C2A2_data/BinnedCsvs_d400/fb441e62df2d58994928907a91895ec62c2c42e6cd075c2700843b89.csv')
 
 df = df.sort_values('Date', ascending=True)
 
