@@ -23,8 +23,6 @@ df = df.rename(columns={'Height (inches)': 'Height', 'Weight (lbs)': 'Weight'})
 columns = ['Height', 'Tackles per Game']
 df_height = df[['Height', 'Tackles per Game']].copy()
 df_weight = df[['Weight', 'Tackles per Game']].copy()
-# print(df_height)
-# print(df_weight)
 fig, axes = plt.subplots(1, 2)
 df_height['height_bin'] = pd.cut(df_height['Height'], bins=9)
 df_height.boxplot(column='Tackles per Game', by='height_bin', ax=axes[0])
