@@ -1,3 +1,4 @@
+from sklearn.model_selection import train_test_split
 import numpy as np
 import pandas as pd
 from sklearn.datasets import load_breast_cancer
@@ -27,9 +28,10 @@ def answer_three():
     cancerdf = answer_one()
     X = cancerdf.iloc[:, :30]
     y = cancerdf.iloc[:, 30]
-    print(type(X))
-    print(type(y))
     return (X, y)
 
 
-print(type(answer_three()))
+def answer_four():
+    X, y = answer_three()
+    X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=0)
+    return X_train, X_test, y_train, y_test
