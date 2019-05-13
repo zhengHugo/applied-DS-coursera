@@ -51,12 +51,17 @@ def answer_five():
 def answer_six():
     cancerdf = answer_one()
     knn = answer_five()
-    # means = (cancerdf.mean()[:-1].values.reshape(1, -1))
     means = cancerdf.mean()[:-1].values.reshape(1, -1)
-    print(means)
     prediction = knn.predict(means)
     ans = np.array(prediction)
     return ans
 
 
-print(answer_six())
+def answer_seven():
+    _, X_test, _, _ = answer_four()
+    knn = answer_five()
+    prediction = knn.predict(X_test)
+    return prediction
+
+
+print(answer_seven())
