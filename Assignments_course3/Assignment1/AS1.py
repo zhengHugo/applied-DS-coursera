@@ -14,4 +14,22 @@ def answer_one():
     return df
 
 
-print(answer_one())
+def answer_two():
+    cancerdf = answer_one()
+    malignant_count = len(cancerdf[cancerdf['target'] == 0])
+    benign_count = len(cancerdf[cancerdf['target'] == 1])
+    index = ['malignant', 'benign']
+    target = pd.Series(data=[malignant_count, benign_count], index=index)
+    return target
+
+
+def answer_three():
+    cancerdf = answer_one()
+    X = cancerdf.iloc[:, :30]
+    y = cancerdf.iloc[:, 30]
+    print(type(X))
+    print(type(y))
+    return (X, y)
+
+
+print(type(answer_three()))
