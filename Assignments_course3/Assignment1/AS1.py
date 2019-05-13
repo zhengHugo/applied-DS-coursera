@@ -48,4 +48,15 @@ def answer_five():
     return knn
 
 
-print(answer_five())
+def answer_six():
+    cancerdf = answer_one()
+    knn = answer_five()
+    # means = (cancerdf.mean()[:-1].values.reshape(1, -1))
+    means = cancerdf.mean()[:-1].values.reshape(1, -1)
+    print(means)
+    prediction = knn.predict(means)
+    ans = np.array(prediction)
+    return ans
+
+
+print(answer_six())
