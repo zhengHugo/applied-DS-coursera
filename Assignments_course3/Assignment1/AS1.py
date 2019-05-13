@@ -1,3 +1,4 @@
+from sklearn.neighbors import KNeighborsClassifier
 from sklearn.model_selection import train_test_split
 import numpy as np
 import pandas as pd
@@ -35,3 +36,16 @@ def answer_four():
     X, y = answer_three()
     X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=0)
     return X_train, X_test, y_train, y_test
+
+
+def answer_five():
+    X_train, _, y_train, _ = answer_four()
+
+    # Your code here
+    knn = KNeighborsClassifier(n_neighbors=1)
+    knn.fit(X_train, y_train)
+
+    return knn
+
+
+print(answer_five())
