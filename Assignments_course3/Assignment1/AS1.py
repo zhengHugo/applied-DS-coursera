@@ -64,4 +64,12 @@ def answer_seven():
     return prediction
 
 
-print(answer_seven())
+def answer_eight():
+    _, X_test, _, y_test = answer_four()
+    knn = answer_five()
+    ans = knn.score(X_test, y_test)
+
+    return ans
+
+
+print(answer_eight())
