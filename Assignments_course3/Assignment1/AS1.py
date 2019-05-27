@@ -40,11 +40,8 @@ def answer_four():
 
 def answer_five():
     X_train, _, y_train, _ = answer_four()
-
-    # Your code here
     knn = KNeighborsClassifier(n_neighbors=1)
     knn.fit(X_train, y_train)
-
     return knn
 
 
@@ -68,8 +65,4 @@ def answer_eight():
     _, X_test, _, y_test = answer_four()
     knn = answer_five()
     ans = knn.score(X_test, y_test)
-
     return ans
-
-
-print(answer_eight())
