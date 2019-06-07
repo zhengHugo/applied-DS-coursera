@@ -116,4 +116,25 @@ def answer_three():
     return (0, 9, 6)
 
 
-answer_three()
+'''
+Training models on high degree polynomial features can result in overly complex models that overfit, so we often use regularized versions of the model to constrain model complexity, as we saw with Ridge and Lasso linear regression.
+
+For this question, train two models: a non-regularized LinearRegression model (default parameters) and a regularized Lasso Regression model (with parameters  alpha=0.01, max_iter=10000) both on polynomial features of degree 12. Return the  R2R2  score for both the LinearRegression and Lasso model's test sets.
+
+This function should return one tuple (LinearRegression_R2_test_score, Lasso_R2_test_score)
+'''
+
+
+def answer_four():
+    from sklearn.preprocessing import PolynomialFeatures
+    from sklearn.linear_model import Lasso, LinearRegression
+    from sklearn.metrics.regression import r2_score
+
+    poly = PolynomialFeatures(degree=12)
+    X_train_poly = poly.fit_transform(X_train.reshape(-1, 1))
+    X_test_poly = poly.fit_transform(X_test.reshape(-1, 1))
+    linreg = LinearRegression().fit(X_train_poly, y_train)
+    linlasso = Lasso(alpha=0.01, max_iter=10000).fit(X_train_poly, y_train)
+    score_linreg_test = linreg.score(X_test_poly, y_test)
+    score_lasso_test = linlasso.score(X_test_poly, y_test)
+    return (score_linreg_test, score_lasso_test)
