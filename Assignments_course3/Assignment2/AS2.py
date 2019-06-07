@@ -91,3 +91,29 @@ def answer_two():
         results_train[i] = score_train
         results_test[i] = score_test
     return (results_train, results_test)
+
+
+'''
+Based on the R2 scores from question 2 (degree levels 0 through 9), what degree level corresponds to a model that is underfitting? What degree level corresponds to a model that is overfitting? What choice of degree level would provide a model with good generalization performance on this dataset?
+
+Hint: Try plotting the  R2R2  scores from question 2 to visualize the relationship between degree level and  R2R2 . Remember to comment out the import matplotlib line before submission.
+
+This function should return one tuple with the degree values in this order: (Underfitting, Overfitting, Good_Generalization). There might be multiple correct solutions, however, you only need to return one possible solution, for example, (1,2,3).
+'''
+
+
+def answer_three():
+    import matplotlib.pyplot as plt
+
+    (results_train, results_test) = answer_two()
+    plt.figure()
+    plt.plot(range(0, 10, 1), results_train, '-',
+             label='training data')
+    plt.plot(range(0, 10, 1), results_test, '-',
+             label='test data')
+    plt.legend()
+    plt.show()
+    return (0, 9, 6)
+
+
+answer_three()
