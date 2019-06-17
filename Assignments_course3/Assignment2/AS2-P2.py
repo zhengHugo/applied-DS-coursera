@@ -40,13 +40,40 @@ def answer_five():
     clf = DecisionTreeClassifier(random_state=0).fit(X_train2, y_train2)
     Series = pd.Series(data=clf.feature_importances_,
                        index=X_train2.columns.values)
-    print(Series)
-
     results = Series.sort_values(axis=0, ascending=False).index.tolist()
-
     answer = results[:5]
-
     return answer
 
 
-answer_five()
+'''
+    For this question, we're going to use the validation_curve function in sklearn.model_selection to determine training and test scores for a Support Vector Classifier (SVC) with varying parameter values. Recall that the validation_curve function, in addition to taking an initialized unfitted classifier object, takes a dataset as input and does its own internal train-test splits to compute results.
+
+    Because creating a validation curve requires fitting multiple models, for performance reasons this question will use just a subset of the original mushroom dataset: please use the variables X_subset and y_subset as input to the validation curve function (instead of X_mush and y_mush) to reduce computation time.
+
+    The initialized unfitted classifier object we'll be using is a Support Vector Classifier with radial basis kernel. So your first step is to create an SVC object with default parameters (i.e. kernel='rbf', C=1) and random_state=0. Recall that the kernel width of the RBF kernel is controlled using the gamma parameter.
+
+    With this classifier, and the dataset in X_subset, y_subset, explore the effect of gamma on classifier accuracy by using the validation_curve function to find the training and test scores for 6 values of gamma from 0.0001 to 10 (i.e. np.logspace(-4,1,6)). Recall that you can specify what scoring metric you want validation_curve to use by setting the "scoring" parameter. In this case, we want to use "accuracy" as the scoring metric.
+
+    For each level of gamma, validation_curve will fit 3 models on different subsets of the data, returning two 6x3 (6 levels of gamma x 3 fits per level) arrays of the scores for the training and test sets.
+
+    Find the mean score across the three models for each level of gamma for both arrays, creating two arrays of length 6, and return a tuple with the two arrays.
+'''
+
+
+def answer_six():
+    from sklearn.svm import SVC
+    from sklearn.model_selection import validation_curve
+
+    clf = SVC(kernel='rbf', C=1, gamma='auto').fit(X_train2, y_train2)
+
+    param_range = np.logspace(-4, 1, 6)
+
+    train_scores, test_scores = validation_curve(clf, X_subset, y_subset, param_name='gamma',
+                                                 param_range=param_range, cv=3, scoring='accuracy')
+    training_scores_mean = np.mean(train_scores, axis=1)
+    test_scores_mean = np.mean(test_scores, axis=1)
+
+    return (training_scores_mean, test_scores_mean)
+
+
+print(answer_six())
