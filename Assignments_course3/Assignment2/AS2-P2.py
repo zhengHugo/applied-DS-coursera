@@ -76,4 +76,14 @@ def answer_six():
     return (training_scores_mean, test_scores_mean)
 
 
-print(answer_six())
+'''
+    Based on the scores from question 6, what gamma value corresponds to a model that is underfitting (and has the worst test set accuracy)? What gamma value corresponds to a model that is overfitting (and has the worst test set accuracy)? What choice of gamma would be the best choice for a model with good generalization performance on this dataset (high accuracy on both training and test set)?
+
+    Hint: Try plotting the scores from question 6 to visualize the relationship between gamma and accuracy. Remember to comment out the import matplotlib line before submission.
+
+    This function should return one tuple with the degree values in this order: (Underfitting, Overfitting, Good_Generalization) Please note there is only one correct solution.
+'''
+
+
+def answer_severn():
+    return (1.00000000e-04, 1.00000000e+01, 1.00000000e-01)
