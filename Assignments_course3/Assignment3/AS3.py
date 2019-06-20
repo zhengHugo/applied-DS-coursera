@@ -27,6 +27,3 @@ def answer_two():
     y_dummy = dummy_majority.predict(X_test)
     ans = (accuracy_score(y_test, y_dummy), recall_score(y_test, y_dummy))
     return ans
-
-
-print(answer_two())
