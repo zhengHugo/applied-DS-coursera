@@ -27,3 +27,22 @@ def answer_two():
     y_dummy = dummy_majority.predict(X_test)
     ans = (accuracy_score(y_test, y_dummy), recall_score(y_test, y_dummy))
     return ans
+
+
+'''
+Using X_train, X_test, y_train, y_test (as defined above), train a SVC classifer using the default parameters. What is the accuracy, recall, and precision of this classifier?
+
+This function should a return a tuple with three floats, i.e. (accuracy score, recall score, precision score).
+'''
+
+
+def answer_three():
+    from sklearn.svm import SVC
+    from sklearn.metrics import accuracy_score, recall_score, precision_score
+
+    svm = SVC(gamma='auto').fit(X_train, y_train)
+    y_predict = svm.predict(X_test)
+    acc_score = accuracy_score(y_test, y_predict)
+    rec_score = recall_score(y_test, y_predict)
+    pre_score = precision_score(y_test, y_predict)
+    return(acc_score, rec_score, pre_score)
