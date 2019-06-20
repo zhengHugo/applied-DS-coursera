@@ -46,3 +46,20 @@ def answer_three():
     rec_score = recall_score(y_test, y_predict)
     pre_score = precision_score(y_test, y_predict)
     return(acc_score, rec_score, pre_score)
+
+
+'''
+Using the SVC classifier with parameters {'C': 1e9, 'gamma': 1e-07}, what is the confusion matrix when using a threshold of -220 on the decision function. Use X_test and y_test.
+
+This function should return a confusion matrix, a 2x2 numpy array with 4 integers.
+'''
+
+
+def answer_four():
+    from sklearn.svm import SVC
+    from sklearn.metrics import confusion_matrix
+
+    svm = SVC(C=1e9, gamma=1e-07).fit(X_train, y_train)
+    y_predict = svm.decision_function(X_test) > -220
+    confusion = confusion_matrix(y_test, y_predict)
+    return confusion
