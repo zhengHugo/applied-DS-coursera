@@ -60,6 +60,30 @@ def answer_four():
     from sklearn.metrics import confusion_matrix
 
     svm = SVC(C=1e9, gamma=1e-07).fit(X_train, y_train)
-    y_predict = svm.decision_function(X_test) > -220
-    confusion = confusion_matrix(y_test, y_predict)
+    svm_predict = svm.decision_function(X_test) > -220
+    confusion = confusion_matrix(y_test, svm_predict)
     return confusion
+
+
+'''
+Train a logisitic regression classifier with default parameters using X_train and y_train.
+For the logisitic regression classifier, create a precision recall curve and a roc curve using y_test and the probability estimates for X_test (probability it is fraud).
+Looking at the precision recall curve, what is the recall when the precision is 0.75?
+Looking at the roc curve, what is the true positive rate when the false positive rate is 0.16?
+This function should return a tuple with two floats, i.e. (recall, true positive rate).
+'''
+
+
+def answer_five():
+    from sklearn.linear_model import LogisticRegression
+    from sklearn.metrics import precision_recall_curve, roc_curve
+    import matplotlib.pyplot as plt
+    lr = LogisticRegression(solver='liblinear').fit(X_train, y_train)
+    lr_scores = lr.decision_function(X_test)
+    precision, recall, _ = precision_recall_curve(y_test, lr_scores)
+    closest_zero_p = np.argmin(np.abs(precision-0.75))
+    closest_zero_r = recall[closest_zero_p]
+    fpr_lr, tpr_lr, _ = roc_curve(y_test, lr_scores)
+    closest_zero_fpr_lr = np.argmin(np.abs(fpr_lr - 0.16))
+    closest_zero_tpr_lr = tpr_lr[closest_zero_fpr_lr]
+    return (closest_zero_r, closest_zero_tpr_lr)
