@@ -87,3 +87,24 @@ def answer_five():
     closest_zero_fpr_lr = np.argmin(np.abs(fpr_lr - 0.16))
     closest_zero_tpr_lr = tpr_lr[closest_zero_fpr_lr]
     return (closest_zero_r, closest_zero_tpr_lr)
+
+
+'''
+Perform a grid search over the parameters listed below for a Logisitic Regression classifier, using recall for scoring and the default 3-fold cross validation.
+
+'penalty': ['l1', 'l2']
+
+'C':[0.01, 0.1, 1, 10, 100]
+
+From .cv_results_, create an array of the mean test scores of each parameter combination. i.e.
+'''
+
+
+def answer_six():
+    from sklearn.linear_model import LogisticRegression
+    from sklearn.model_selection import GridSearchCV
+    lr = LogisticRegression(solver='liblinear')
+    param = {'C': [0.01, 0.1, 1, 10, 100], 'penalty': ['l1', 'l2']}
+    grid_lr = GridSearchCV(lr, param_grid=param,
+                           scoring='recall', cv=3).fit(X_train, y_train)
+    return grid_lr.cv_results_['mean_test_score'].reshape(5, 2)
