@@ -36,5 +36,13 @@ def example_three():
 def question_one():
     return example_two()/example_one()
 
+# What percentage of tokens is 'whale'or 'Whale'?
 
-print(question_one())
+
+def question_two():
+    wdist = nltk.FreqDist(moby_tokens)
+    count = wdist['whale'] + wdist['Whale']
+    return 100 * count / example_one()
+
+
+print(question_two())
