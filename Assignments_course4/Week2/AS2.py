@@ -44,5 +44,12 @@ def question_two():
     count = wdist['whale'] + wdist['Whale']
     return 100 * count / example_one()
 
+# What are the 20 most frequently occurring (unique) tokens in the text? What is their frequency?
 
-print(question_two())
+
+def question_three():
+    fdist = nltk.FreqDist(moby_tokens)
+    return fdist.most_common(20)
+
+
+print(question_three())
