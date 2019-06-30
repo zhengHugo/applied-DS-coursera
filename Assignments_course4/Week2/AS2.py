@@ -1,3 +1,6 @@
+from nltk.util import ngrams
+from nltk.metrics.distance import (edit_distance, jaccard_distance)
+from nltk.corpus import words
 from nltk.stem import WordNetLemmatizer
 import nltk
 import pandas as pd
@@ -82,3 +85,45 @@ def question_six():
 def question_seven():
     sentences = nltk.sent_tokenize(moby_raw)
     return (example_one() / len(sentences))
+
+
+# What are the 5 most frequent parts of speech in this text? What is their frequency?
+def question_eight():
+    # answer from google
+    return [('NN', 4016), ('NNP', 2916), ('JJ', 2875), ('NNS', 2452), ('VBD', 1421)]
+
+
+correct_spellings = words.words()
+spellings_series = pd.Series(correct_spellings)
+
+
+def jaccard(entries, gram_number):
+    """find the closet words to each entry
+
+    Args:
+     entries: collection of words to match
+     gram_number: number of n-grams to use
+
+    Returns:
+     list: words with the closest jaccard distance to entries
+    """
+    outcomes = []
+    for entry in entries:
+        spellings = spellings_series[spellings_series.str.startswith(entry[0])]
+        distances = ((jaccard_distance(set(ngrams(entry, gram_number)), set(
+            ngrams(word, gram_number))), word) for word in spellings)
+        closest = min(distances)
+        print(closest)
+        outcomes.append(closest[1])
+    return outcomes
+
+
+# For this recommender, your function should provide recommendations for the three default words provided above using the following distance metric:
+# Jaccard distance on the trigrams of the two words.
+
+
+def answer_nine(entries=['cormulent', 'incendenece', 'validrate']):
+    return jaccard(entries, gram_number=3)
+
+
+print(answer_nine())
