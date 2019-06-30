@@ -44,12 +44,38 @@ def question_two():
     count = wdist['whale'] + wdist['Whale']
     return 100 * count / example_one()
 
-# What are the 20 most frequently occurring (unique) tokens in the text? What is their frequency?
 
+# What are the 20 most frequently occurring (unique) tokens in the text? What is their frequency?
 
 def question_three():
     fdist = nltk.FreqDist(moby_tokens)
     return fdist.most_common(20)
 
 
-print(question_three())
+# What tokens have a length of greater than 5 and frequency of more than 150?
+def question_four():
+    fdist = nltk.FreqDist(moby_tokens)
+    df = pd.DataFrame(fdist.most_common(), columns=["token", "frequency"])
+    freqwords = df[(df.token.str.len() > 5) & (df.frequency > 150)]
+    return sorted(freqwords.token)
+
+# Find the longest word in text1 and that word's length.
+
+
+def question_five():
+    fdist = nltk.FreqDist(text1)
+
+    # set up the DataFrame
+    df = pd.DataFrame(fdist.most_common(), columns=["token", "frequency"])
+
+    # put the target list in to a list
+    tokenList = df['token']
+
+    # sort the list by the word's length
+    target = sorted(tokenList, key=len, reverse=True)
+
+    # return the result
+    return (target[0], len(target[0]))
+
+
+print(question_five())
