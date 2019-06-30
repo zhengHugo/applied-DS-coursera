@@ -78,4 +78,7 @@ def question_six():
     return tuples
 
 
-print(question_six())
+# What is the average number of tokens per sentence?
+def question_seven():
+    sentences = nltk.sent_tokenize(moby_raw)
+    return (example_one() / len(sentences))
