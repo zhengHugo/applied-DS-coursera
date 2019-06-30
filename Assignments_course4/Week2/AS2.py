@@ -112,8 +112,8 @@ def jaccard(entries, gram_number):
         spellings = spellings_series[spellings_series.str.startswith(entry[0])]
         distances = ((jaccard_distance(set(ngrams(entry, gram_number)), set(
             ngrams(word, gram_number))), word) for word in spellings)
+        # distances is a generator
         closest = min(distances)
-        print(closest)
         outcomes.append(closest[1])
     return outcomes
 
@@ -125,5 +125,34 @@ def jaccard(entries, gram_number):
 def answer_nine(entries=['cormulent', 'incendenece', 'validrate']):
     return jaccard(entries, gram_number=3)
 
+# For this recommender, your function should provide recommendations for the three default words provided above using the following distance metric:
+# Jaccard distance on the 4-grams of the two words.
 
-print(answer_nine())
+
+def answer_ten(entries=['cormulent', 'incendenece', 'validrate']):
+    return jaccard(entries, gram_number=4)
+
+
+def edit(entries):
+    """gets the nearest words based on Levenshtein distance
+
+    Args:
+     entries (list[str]): words to find closest words to
+
+    Returns:
+     list[str]: nearest words to the entries
+    """
+    outcomes = []
+    for entry in entries:
+        distances = ((edit_distance(entry, word), word)
+                     for word in correct_spellings)
+        closest = min(distances)
+        outcomes.append(closest[1])
+    return outcomes
+
+
+def answer_eleven(entries=['cormulent', 'incendenece', 'validrate']):
+    return edit(entries)
+
+
+print(answer_eleven())
