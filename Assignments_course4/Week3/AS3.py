@@ -43,11 +43,17 @@ def answer_three():
 def answer_four():
     vect = TfidfVectorizer().fit(X_train)
     X_train_vectorized = vect.transform(X_train)
-    # find the tfidf value and order the tf_idf_index by importance
     values = X_train_vectorized.max(0).toarray()[0]
     index = vect.get_feature_names()
-
-    # convert the list to the Series required
     features_series = pd.Series(values, index=index)
-
     return (features_series.nsmallest(20), features_series.nlargest(20))
+
+
+# Fit and transform the training data X_train using a Tfidf Vectorizer ignoring terms that have a document frequency strictly lower than 3.
+def answer_five():
+    vect = TfidfVectorizer(min_df=3).fit(X_train)
+    X_train_vectorized = vect.transform(X_train)
+    model = MultinomialNB(alpha=0.1)
+    model.fit(X_train_vectorized, y_train)
+    predictions = model.predict(vect.transform(X_test))
+    return roc_auc_score(y_test, predictions)
