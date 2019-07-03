@@ -3,6 +3,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.metrics import roc_auc_score
 from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.svm import SVC
 import pandas as pd
 import numpy as np
 
@@ -71,3 +72,30 @@ def answer_six():
     not_spam_len_avg = sum(not_spam_len_list)/len(not_spam_len_list)
 
     return (not_spam_len_avg, spam_len_avg)
+
+# The following function has been provided to help you combine new features into the training data:
+
+
+def add_feature(X, feature_to_add):
+    """
+    Returns sparse feature matrix with added feature.
+    feature_to_add can also be a list of features.
+    """
+    from scipy.sparse import csr_matrix, hstack
+    return hstack([X, csr_matrix(feature_to_add).T], 'csr')
+
+
+# Fit and transform the training data X_train using a Tfidf Vectorizer ignoring terms that have a document frequency strictly lower than 5
+# Using this document-term matrix and an additional feature, the length of document (number of characters), fit a Support Vector Classification model with regularization C=10000. Then compute the area under the curve (AUC) score using the transformed test data.
+def answer_seven():
+    vect = TfidfVectorizer(min_df=5).fit(X_train)
+    X_train_vectorized = vect.fit_transform(X_train)
+    X_test_vectorized = vect.transform(X_test)
+    X_train_len = X_train.apply(len)
+    X_test_len = X_test.apply(len)
+    X_train_aug = add_feature(X_train_vectorized, X_train_len)
+    X_test_aug = add_feature(X_test_vectorized, X_test_len)
+    model = SVC(C=10000, gamma='auto')
+    model.fit(X_train_aug, y_train)
+    predictions = model.predict(X_test_aug)
+    return roc_auc_score(y_test, predictions)
