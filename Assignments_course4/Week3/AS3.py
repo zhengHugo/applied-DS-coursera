@@ -57,3 +57,17 @@ def answer_five():
     model.fit(X_train_vectorized, y_train)
     predictions = model.predict(vect.transform(X_test))
     return roc_auc_score(y_test, predictions)
+
+
+# What is the average length of documents (number of characters) for not spam and spam documents?
+def answer_six():
+    spams = spam_data[spam_data['target'] == 1]['text']
+    not_spams = spam_data[spam_data['target'] == 0]['text']
+
+    spam_len_list = [len(text) for text in spams]
+    not_spam_len_list = [len(text) for text in not_spams]
+
+    spam_len_avg = sum(spam_len_list)/len(spam_len_list)
+    not_spam_len_avg = sum(not_spam_len_list)/len(not_spam_len_list)
+
+    return (not_spam_len_avg, spam_len_avg)
