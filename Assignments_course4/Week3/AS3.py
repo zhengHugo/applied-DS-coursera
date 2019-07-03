@@ -143,3 +143,13 @@ def answer_nine():
 
     predictions = model.predict(X_test_aug_2)
     return roc_auc_score(y_test, predictions)
+
+# What is the average number of non-word characters (anything other than a letter, digit or underscore) per document for not spam and spam documents?
+
+
+def answer_ten():
+    spam_char_avg = spam_data.loc[spam_data['target']
+                                  == 1, 'text'].str.count(r'\W').mean()
+    not_spam_char_avg = spam_data.loc[spam_data['target'] == 0, 'text'].str.count(
+        r'\W').mean()
+    return (not_spam_char_avg, spam_char_avg)
