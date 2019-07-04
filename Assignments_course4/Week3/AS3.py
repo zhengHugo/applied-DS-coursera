@@ -144,12 +144,53 @@ def answer_nine():
     predictions = model.predict(X_test_aug_2)
     return roc_auc_score(y_test, predictions)
 
+
 # What is the average number of non-word characters (anything other than a letter, digit or underscore) per document for not spam and spam documents?
-
-
 def answer_ten():
     spam_char_avg = spam_data.loc[spam_data['target']
                                   == 1, 'text'].str.count(r'\W').mean()
     not_spam_char_avg = spam_data.loc[spam_data['target'] == 0, 'text'].str.count(
         r'\W').mean()
     return (not_spam_char_avg, spam_char_avg)
+
+
+def answer_eleven():
+    vect = TfidfVectorizer(min_df=5, analyzer='char_wb',
+                           ngram_range=(2, 5)).fit(X_train)
+
+    X_train_vectorized = vect.transform(X_train)
+    X_test_vectorized = vect.transform(X_test)
+
+    X_train_len = X_train.apply(len)
+    X_test_len = X_test.apply(len)
+
+    X_train_digits_len = X_train.str.count(r'\d')
+    X_test_digits_len = X_test.str.count(r'\d')
+
+    X_train_spam_char_len = X_train.str.count(r'\W')
+    X_test_spam_char_len = X_test.str.count(r'\W')
+
+    X_train_aug_1 = add_feature(X_train_vectorized, X_train_len)
+    X_train_aug_2 = add_feature(X_train_aug_1, X_train_digits_len)
+    X_train_aug_3 = add_feature(X_train_aug_2, X_train_spam_char_len)
+
+    X_test_aug_1 = add_feature(X_test_vectorized, X_test_len)
+    X_test_aug_2 = add_feature(X_test_aug_1, X_test_digits_len)
+    X_test_aug_3 = add_feature(X_test_aug_2, X_test_spam_char_len)
+
+    model = LogisticRegression(C=100)
+    model.fit(X_train_aug_3, y_train)
+
+    predictions = model.predict(X_test_aug_3)
+
+    feature_names = np.array(vect.get_feature_names(
+    ) + ["length_of_doc", "digit_count", "non_word_char_count"])
+
+    sorted_indices = model.coef_[0].argsort()
+    small = feature_names[sorted_indices[:10]].tolist()
+    large = feature_names[sorted_indices[-11:-1]].tolist()
+
+    return (roc_auc_score(y_test, predictions), small, large)
+
+
+print(answer_eleven())
