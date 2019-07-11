@@ -73,3 +73,31 @@ def answer_three():
     B = answer_two()
     P = bipartite.weighted_projected_graph(B, employees)
     return P
+
+
+# Find the Pearson correlation ( using DataFrame.corr() ) between employee relationship scores and the number of movies they have in common.
+def answer_four():
+    rel = nx.read_edgelist(
+        'Assignments_course5/Week1/Employee_Relationships.txt', data=[('relationship', int)])
+    df_rel = pd.DataFrame(rel.edges(data=True), columns=[
+                          'from', 'to', 'relation_score'])
+
+    df_rel['relation_score'] = df_rel['relation_score'].apply(
+        lambda x: x['relationship'])
+    mov = answer_three()
+    df_mov = pd.DataFrame(mov.edges(data=True), columns=[
+                          'from', 'to', 'mov_common'])
+    df_mov['mov_common'] = df_mov['mov_common'].apply(lambda x: x['weight'])
+    df_mov_copy = df_mov.copy()
+    df_mov_copy.columns = ['to', 'from', 'mov_common']
+    df_mov_copy = df_mov_copy.reindex(columns=['from', 'to', 'mov_common'])
+    df_mov = pd.concat([df_mov, df_mov_copy])
+
+    df = pd.merge(df_rel, df_mov, how='outer', on=['from', 'to'])
+    df = df[np.isfinite(df['relation_score'])]
+    df = df.fillna(0)
+    corr = df.corr(method='pearson')
+    return corr
+
+
+print(answer_four())
