@@ -27,4 +27,5 @@ See the notebook
 
 Similar definition for R-Bipartite graph projection
 
-**L-Bipartite weighted graph projection**: An L-Bipartite graph projection with weights on the edges that are proportional to the number of common neighbors between the nodes
+**L-Bipartite weighted graph projection**: An L-Bipartite graph projection with weights on the edges that are proportional to the number of common neighbors between the nodes.
+

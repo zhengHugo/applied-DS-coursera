@@ -56,7 +56,14 @@ def plot_graph(G, weight_name=None):
 def answer_one():
     G = nx.read_edgelist(
         'Assignments_course5/Week1/Employee_Movie_Choices.txt', delimiter="\t")
-    return G.edges
+    return G
 
 
-print(answer_one())
+def answer_two():
+    G = answer_one()
+    for node in G.nodes():
+        if node in employees:
+            G.add_node(node, type="employee")
+        else:
+            G.add_node(node, type="movie")
+    return G.nodes(data=True)
