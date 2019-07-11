@@ -66,4 +66,10 @@ def answer_two():
             G.add_node(node, type="employee")
         else:
             G.add_node(node, type="movie")
-    return G.nodes(data=True)
+    return G
+
+
+def answer_three():
+    B = answer_two()
+    P = bipartite.weighted_projected_graph(B, employees)
+    return P
