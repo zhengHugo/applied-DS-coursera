@@ -13,3 +13,7 @@ Edges can carry many other labels or attributes
 A pair of nodes can have different types of relationships simultaneously
 
 ## Node and Edge Attributes
+See the notebook
+- Adding node and edge attributes
+- Accessing node attributes
+- 
