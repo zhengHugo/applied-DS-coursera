@@ -71,3 +71,10 @@ def answer_eleven():
             ans_node = node
             max_count = count
     return ans_node, max_count
+
+
+def answer_twelve():
+    G = answer_six()
+    center = nx.center(G)[0]
+    node = answer_eleven()[0]
+    return len(nx.minimum_node_cut(G, center, node))
