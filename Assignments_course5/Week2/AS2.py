@@ -34,3 +34,8 @@ def answer_six():
     sccg = nx.strongly_connected_component_subgraphs(G)
     G_sc = max(sccg, key=len)
     return G_sc
+
+
+def answer_seven():
+    G_sc = answer_six()
+    return nx.average_shortest_path_length(G_sc)
