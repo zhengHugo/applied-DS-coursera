@@ -14,4 +14,4 @@ def answer_two():
 
 def answer_three():
     G = answer_one()
-    return nx.is_strongly_connected(G), nx.is_connected(G.to_undirected())
+    return nx.is_strongly_connected(G), nx.is_weakly_connected(G)
