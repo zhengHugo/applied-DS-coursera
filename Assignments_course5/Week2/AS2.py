@@ -10,3 +10,8 @@ def answer_one():
 def answer_two():
     G = answer_one()
     return len(G.nodes()), len(G.edges())
+
+
+def answer_three():
+    G = answer_one()
+    return nx.is_strongly_connected(G), nx.is_connected(G.to_undirected())
