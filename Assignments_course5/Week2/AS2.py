@@ -15,3 +15,9 @@ def answer_two():
 def answer_three():
     G = answer_one()
     return nx.is_strongly_connected(G), nx.is_weakly_connected(G)
+
+
+def answer_four():
+    G = answer_one()
+    wcc = nx.weakly_connected_components(G)
+    return len(max(wcc, key=len))
