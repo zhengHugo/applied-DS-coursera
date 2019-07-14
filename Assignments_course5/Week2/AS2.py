@@ -84,3 +84,11 @@ def answer_thirteen():
     G = answer_six()
     G_un = nx.Graph(G.to_undirected())
     return G_un
+
+
+def answer_fourteen():
+    G_un = answer_thirteen()
+    return nx.transitivity(G_un), nx.average_clustering(G_un)
+
+
+print(answer_fourteen())
