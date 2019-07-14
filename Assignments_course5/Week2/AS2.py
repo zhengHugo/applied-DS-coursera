@@ -78,3 +78,9 @@ def answer_twelve():
     center = nx.center(G)[0]
     node = answer_eleven()[0]
     return len(nx.minimum_node_cut(G, center, node))
+
+
+def answer_thirteen():
+    G = answer_six()
+    G_un = nx.Graph(G.to_undirected())
+    return G_un
