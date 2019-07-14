@@ -39,3 +39,11 @@ def answer_six():
 def answer_seven():
     G_sc = answer_six()
     return nx.average_shortest_path_length(G_sc)
+
+
+def answer_eight():
+    G_sc = answer_six()
+    return nx.diameter(G_sc)
+
+
+print(answer_eight())
