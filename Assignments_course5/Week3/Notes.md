@@ -23,3 +23,16 @@ The most basic measure of centrality: number of neighbors
 Undirected networks: use degree <br>
 Directed networks: use in-degree or out-degree
 
+### Degree Centrality - Undirected Networks
+$C_{deg}(v) = \frac{d_v}{|N|-1}$, where $N$ is the set of nodes in the network and $d_v$ is the degree of node $v$.
+
+### Degree Centrality - Directed Networks
+$C_{indeg}(v) = \frac{d^{in}_v}{|N|-1}$, where $N =$ set of the network, $d^{in}_v =$ the in-degree of node $v$
+
+$C_{outdeg}(v) = \frac{d^{out}_v}{|N|-1}$, where $N =$ set of the network, $d^{out}_v =$ the out-degree of node $v$
+
+### Closeness centrality
+Assumption: important nodes are close to other nodes
+
+
+
