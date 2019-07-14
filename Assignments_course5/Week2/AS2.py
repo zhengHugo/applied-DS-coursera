@@ -27,3 +27,10 @@ def answer_five():
     G = answer_one()
     scc = nx.strongly_connected_components(G)
     return len(max(scc, key=len))
+
+
+def answer_six():
+    G = answer_one()
+    sccg = nx.strongly_connected_component_subgraphs(G)
+    G_sc = max(sccg, key=len)
+    return G_sc
