@@ -53,4 +53,4 @@ def answer_nine():
 
 def answer_ten():
     G = answer_six()
-    return set(nx.eccentricity(G))
+    return set(nx.center(G))
