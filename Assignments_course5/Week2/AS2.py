@@ -49,3 +49,8 @@ def answer_eight():
 def answer_nine():
     G = answer_six()
     return set(nx.periphery(G))
+
+
+def answer_ten():
+    G = answer_six()
+    return set(nx.eccentricity(G))
