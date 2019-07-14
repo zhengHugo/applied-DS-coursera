@@ -46,4 +46,6 @@ def answer_eight():
     return nx.diameter(G_sc)
 
 
-print(answer_eight())
+def answer_nine():
+    G = answer_six()
+    return set(nx.periphery(G))
