@@ -54,3 +54,20 @@ def answer_nine():
 def answer_ten():
     G = answer_six()
     return set(nx.center(G))
+
+
+def answer_eleven():
+    G_sc = answer_six()
+    d = nx.diameter(G_sc)
+    peripheries = nx.periphery(G_sc)
+    max_count = 0
+    for node in peripheries:
+        count = 0
+        sp = nx.shortest_path_length(G_sc, node)
+        for _, value in sp.items():
+            if value == d:
+                count += 1
+        if count >= max_count:
+            ans_node = node
+            max_count = count
+    return ans_node, max_count
