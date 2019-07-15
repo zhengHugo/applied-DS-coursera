@@ -34,5 +34,20 @@ $C_{outdeg}(v) = \frac{d^{out}_v}{|N|-1}$, where $N =$ set of the network, $d^{o
 ### Closeness centrality
 Assumption: important nodes are close to other nodes
 
+$C_{close}(v)=\frac{|N|-1}{\Sigma_{u\in N \setminus \{v\}}d(v,u)}$
+
+### Disconnected Nodes
+How to measure the closeness centrality of a node when it cannot reach all othoer nodes?
+
+**Option I:** Consider only nodes that L can reach
+
+$C_{close}(L)=\frac{|R(L)|}{\Sigma_{u\in R(L)}d(L,u)}$, where $R(L)$ is the set of nodes L can reach.
+
+**Problem:** centraliy of I is too high for a node that can only reach one other node!
+
+**Option II:** Consider only nodes that $L$ can reach and normalize by the fraction of nodes $L$ can reach:
+
+$C_{close}(L) = [\frac{|R(L)|}{|N|-1}]\frac{|R(L)|}{\Sigma_{u\in R(L)}d(L,u)}$
+
 
 
