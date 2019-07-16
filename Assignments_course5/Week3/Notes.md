@@ -49,5 +49,39 @@ $C_{close}(L)=\frac{|R(L)|}{\Sigma_{u\in R(L)}d(L,u)}$, where $R(L)$ is the set 
 
 $C_{close}(L) = [\frac{|R(L)|}{|N|-1}]\frac{|R(L)|}{\Sigma_{u\in R(L)}d(L,u)}$
 
+## Betweenness Centrality
+**Assupmtion:** important nodes connect other notes
 
+$C_{btw}(v) = \Sigma_{s,t\in N}\frac{\sigma_{s,t}(v)}{\sigma_{s,t}}$, where 
+- $\sigma_{s,t} =$ the number of shortest paths between nodes $s$ and $t$.
+- $\sigma_{s,t}(v) =$ the number of shortest paths between nodes $s$ and $t$ that pass through node $v$
 
+### Betweenness Centrality - Normalization
+**Normalization:** betweenness centrality values will be larger in graphs with many nodes. To control for this, we divide centrality values by the number of pairs of nodes in the graph (excluding $v$):
+- $\frac{1}{2}(|N|-1)(|N|-2)$ in undirected graphs
+- $(|N|-1)(|N|-2)$ in directed graphs
+
+### Betweenness Centrality - Complexity
+Computing betweenness centrality of all nodes can be very computationally expensive. Depending on the algorithm, this computation can take up to $O(|N|^3)$ time.
+
+**Approximation:** rather can computing betweenness centrality based on all pairs of nodes $s,t$, we can approximate it based on a sample of nodes.
+
+### Betweenness Centrality - Subsets
+
+### Betweenness Centrality - Edges
+$C_{btw}(e)=\sum_{s,t\in N}\frac{\sigma_{s,t}(e)}{\sigma_{s,t}}$, where
+- $\sigma_{s,t}=$ the number of shortest paths between nodes $s$ and $t$.
+- $\sigma_{s,t}=$ the number of shortest paths between nodes $s$ and $t$ that pass through edge $e$.
+
+## Basic Page Rank
+Developed by Google founders to measure the importance of webpages from the hyperlink network structure.
+
+PageRank assigns a score of importance to each node. Important nodes are those with many in-links from important pages.
+
+- $n=$ number of nodes in the network
+- $k=$ number of steps
+
+1. Assign all nodes a PageRank of $\frac{1}{n}$
+2. Perform the *Basic PageRank Update Rule* $k$ times.
+
+**Basic PageRank Update Rule:** Each node gives an equal share of its current PageRank to all the nodes it links to.
