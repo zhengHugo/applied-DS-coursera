@@ -112,3 +112,5 @@ Computing $k$ iterations of the HITS algorithm to assign an *authority score* an
 2. Apply the **Authority Update Rule**: each nodes <font color='red'> authority</font> score is the sub of <font color='red'> hub </font> scores of each node that <font color='red'> points to it</font>.
 3. Apply the **Hub Update Rule**: each node's <font color='red'> hub </font> score is the sum of <font color='red'>authority </font> scores of each node that <font color='red'> it points to</font>.
 4. **Normalize** Authority and Hub scores: $auth(j) := \frac{auth(j)}{\Sigma_{i\in N}auth(i)}$
+
+## Centrality Examples
