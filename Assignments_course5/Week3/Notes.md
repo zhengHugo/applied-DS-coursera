@@ -104,3 +104,11 @@ Given a query to a search engine:
 - Find all pages that link to a page in root - potential *hubs*
 - **Base**: root nodes and any node that links to a node in root
 - Consider all edges connecting nodes in the base set
+
+### HITS Algorithm
+Computing $k$ iterations of the HITS algorithm to assign an *authority score* and *hub score* to each node.
+
+1. Assign each node an authority and hub score of 1.
+2. Apply the **Authority Update Rule**: each nodes <font color='red'> authority</font> score is the sub of <font color='red'> hub </font> scores of each node that <font color='red'> points to it</font>.
+3. Apply the **Hub Update Rule**: each node's <font color='red'> hub </font> score is the sum of <font color='red'>authority </font> scores of each node that <font color='red'> it points to</font>.
+4. **Normalize** Authority and Hub scores: $auth(j) := \frac{auth(j)}{\Sigma_{i\in N}auth(i)}$
