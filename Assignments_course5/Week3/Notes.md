@@ -85,3 +85,22 @@ PageRank assigns a score of importance to each node. Important nodes are those w
 2. Perform the *Basic PageRank Update Rule* $k$ times.
 
 **Basic PageRank Update Rule:** Each node gives an equal share of its current PageRank to all the nodes it links to.
+
+## Scaled Page Rank
+### Interpreting PageRank
+
+### PageRank Problem
+**Random walk of k steps with damping parameter $\alpha$: Start on a random node, then:
+- <font color='red'> With probability $\alpha$</font>: choose an outgoing edge at random and follow it to the next node.
+- <font color='red'> With probability $1-\alpha$</font>: choose a node at random and go to it.
+
+Repeat $k$ times.
+
+The **Scaled PageRank** of $k$ steps and damping factor $\alpha$ of a node $n$ is the probability that a random walk with damping factor $\alpha$ lands on a $n$ after $k$ steps.
+
+## Hubs and Authorities
+Given a query to a search engine:
+- **Root**: set of highly relevant web pages - potential *autorities*
+- Find all pages that link to a page in root - potential *hubs*
+- **Base**: root nodes and any node that links to a node in root
+- Consider all edges connecting nodes in the base set
