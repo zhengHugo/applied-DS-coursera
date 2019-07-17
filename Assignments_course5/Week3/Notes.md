@@ -114,3 +114,5 @@ Computing $k$ iterations of the HITS algorithm to assign an *authority score* an
 4. **Normalize** Authority and Hub scores: $auth(j) := \frac{auth(j)}{\Sigma_{i\in N}auth(i)}$
 
 ## Centrality Examples
+### Comparing Centrality Measures
+
