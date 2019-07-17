@@ -14,3 +14,8 @@ def answer_one():
 def answer_two():
     degrees = nx.degree_centrality(G1)
     return max(degrees, key=degrees.get)
+
+
+def answer_three():
+    centras = nx.closeness_centrality(G1)
+    return max(centras, key=centras.get)
