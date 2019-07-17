@@ -49,3 +49,9 @@ def answer_eight():
     hits = nx.hits(G2)
     hubs = hits[0]
     return sorted(hubs, key=hubs.get, reverse=True)[0:5]
+
+
+def answer_nine():
+    hits = nx.hits(G2)
+    authorities = hits[1]
+    return sorted(authorities, key=authorities.get, reverse=True)[:5]
