@@ -19,3 +19,8 @@ def answer_two():
 def answer_three():
     centras = nx.closeness_centrality(G1)
     return max(centras, key=centras.get)
+
+
+def answer_four():
+    centras = nx.betweenness_centrality(G1)
+    return max(centras, key=centras.get)
