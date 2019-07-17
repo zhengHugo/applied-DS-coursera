@@ -37,3 +37,9 @@ def answer_five():
 def answer_six():
     pageRank = nx.pagerank(G2, alpha=0.85)
     return sorted(pageRank, key=pageRank.get, reverse=True)[0:5]
+
+
+def answer_seven():
+    hits = nx.hits(G2)
+    key = 'realclearpolitics.com'
+    return hits[0][key], hits[0][key]
