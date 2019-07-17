@@ -43,3 +43,9 @@ def answer_seven():
     hits = nx.hits(G2)
     key = 'realclearpolitics.com'
     return hits[0][key], hits[0][key]
+
+
+def answer_eight():
+    hits = nx.hits(G2)
+    hubs = hits[0]
+    return sorted(hubs, key=hubs.get, reverse=True)[0:5]
