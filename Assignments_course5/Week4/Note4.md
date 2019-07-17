@@ -46,3 +46,70 @@ Small-world model:
 ### Small World Model in NetworkX
 `watts_strogatz_graph(n, k, p)` returns a small world network with `n` nodes, starting with a ring lattice with each node connected to its `k` nearest neighbors, and reviewing probability `p`.
 
+## Link Prediction
+**Triadic closure:** the tendency for people who share connections in a social network to become connected
+### Measure I: Common Neighbors
+The number of common neighbors of nodes $X$ and $Y$ is 
+$$
+\text{comm\_neigh}(X,Y)=|N(X)\cap N(Y)|
+$$
+where $N(X)$ is the set of neighbors of node $X$
+
+### Measure II: Jaccard Coefficient
+Number of common neighbors normalized by the total number of neighbors
+$$
+\text{jacc\_coeff}(X,Y)=\frac{|N(X)\cap N(Y)|}{|N(X)\cup N(Y)|}$$
+
+### Measure III: Resource Allocation
+Fraction of a "resource" that a node can send to another through their common neighbors.
+
+The Resource Allocation index of nodes $X$ and $Y$ is 
+$$
+\text{res\_alloc}(X,Y)=\sum_{u\in N(X) \cap N(Y)}\frac{1}{|N(u)|}$$
+
+### Measure IV: Adamic-Adar Index
+Similar to resource allocation index, but with log in the denominator.
+
+The Adamic-Adar index of nodes $X$ and $Y$ is 
+$$
+\text{adamic\_adar}(X,Y)=\sum_{u\in N(X)\cap N(Y)}\frac{1}{\log(|N(u)|)}
+$$
+
+### Measure V: Preferential Attachment
+Product of the node's degree.
+$$
+ \text{pref\_attach}(X,Y)=|N(X)||N(Y)|
+$$
+
+### Community Structure
+Some measures consider the community structure of the network for link prediction
+
+Assume the nodes in this network belong to different communities (sets of nodes)
+
+### Measure VI: Community Common Neighbors
+Number of common neighbors with bonus for neighbors in same community.
+
+The Common Neighbor Soundarajan-Hopcroft score of nodes $X$ and $Y$ is:<br>
+$$
+\text{cn\_soundarajan\_hopcroft}(X,Y)=|N(X)\cap N(Y)|+\sum_{u\in N(X)\cap N(Y)}f(u)
+$$
+where 
+$$
+f(u)=
+\begin{cases} 
+    1, &u \text{ in same community as } X \text{ and }Y \\ 
+    0, & \text{otherwise}   
+\end{cases}
+$$
+
+### Measure VII: Community Resource Allocation
+Similar to resource allocation index, but only considering nodes in the same community
+
+The Resource Allocation Soundarajan-Hopcroft scre of nodes $X$ and $Y$ is:
+$$
+\text{ra\_soundarajan\_hopcroft}(X,Y)=\sum_{u\in N(X)\cap N(Y)}\frac{f(u)}{|N(u)|}
+$$
+
+
+
+
