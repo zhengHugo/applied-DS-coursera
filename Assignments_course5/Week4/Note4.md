@@ -31,3 +31,18 @@ Degree distribution looks like a straight line when on a log-log scale.
 ### Preferential Attachment in NetworkX
 `barabasi_albert_graph(n, m)` returns a network with `n` nodes. Each new node attaches to `m` existing nodes according to the Preferential Attachment model.
 
+## Small World Networks
+### Path Length and Clustering
+Social networks tend to have high clustering coeffient and small average path length.
+
+### Small World Model
+**Motivation:** Real networks exhibit high clustering coeffient and small average shortest paths. Can we think of a mode that achieves both of these properties?
+
+Small-world model:
+- Start with a ring of $n$ nodes, where each node is connected to its $k$ nearest neighbors.
+- Fix a parameter $p\in[0,1]$
+- Consider each edge $(u,v)$. With probability $p$, select a node $w$ at random and rewire the edge $(u,v)$ so it becomes $(u,w)$
+
+### Small World Model in NetworkX
+`watts_strogatz_graph(n, k, p)` returns a small world network with `n` nodes, starting with a ring lattice with each node connected to its `k` nearest neighbors, and reviewing probability `p`.
+
