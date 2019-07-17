@@ -32,3 +32,8 @@ G2 = nx.read_gml('Assignments_course5/Week3/blogs.gml')
 def answer_five():
     pageRank = nx.pagerank(G2, alpha=0.85)
     return pageRank['realclearpolitics.com']
+
+
+def answer_six():
+    pageRank = nx.pagerank(G2, alpha=0.85)
+    return sorted(pageRank, key=pageRank.get, reverse=True)[0:5]
