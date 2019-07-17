@@ -9,3 +9,8 @@ def answer_one():
     betweenness_centrality = nx.betweenness_centrality(
         G1, endpoints=False, normalized=True)[100]
     return degree_centrality, closeness_centrality, betweenness_centrality
+
+
+def answer_two():
+    degrees = nx.degree_centrality(G1)
+    return max(degrees, key=degrees.get)
