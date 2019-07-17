@@ -24,3 +24,11 @@ def answer_three():
 def answer_four():
     centras = nx.betweenness_centrality(G1)
     return max(centras, key=centras.get)
+
+
+G2 = nx.read_gml('Assignments_course5/Week3/blogs.gml')
+
+
+def answer_five():
+    pageRank = nx.pagerank(G2, alpha=0.85)
+    return pageRank['realclearpolitics.com']
