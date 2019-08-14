@@ -192,5 +192,3 @@ def answer_eleven():
 
     return (roc_auc_score(y_test, predictions), small, large)
 
-
-print(answer_eleven())
